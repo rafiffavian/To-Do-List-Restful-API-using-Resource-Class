@@ -14,6 +14,7 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        // dd(NoteResource::collection($this->notes));
         return [
             'id'             => $this->id,
             'name'           => $this->name,
@@ -21,6 +22,7 @@ class UserResource extends JsonResource
             'address'        => $this->alamat,
             'date_of_birth'  => \Carbon\Carbon::parse($this->date_of_birth)->format('D, d M Y'),
             'joined'         => $this->created_at->diffForHumans(),
+            // 'note'           => NoteResource::collection($this->notes),
         ];
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Note;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,19 @@ class User extends Authenticatable
         'alamat',
         'date_of_birth',
     ];
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    public function ownsNote(Note $note)
+    {
+        // dd($note->user->id);
+        // dd($note->user);
+        return auth()->id() === $note->user->id;
+
+    }
 
     /**
      * The attributes that should be hidden for arrays.

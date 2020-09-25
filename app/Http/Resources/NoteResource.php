@@ -15,11 +15,12 @@ class NoteResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'            => $this->id,
             'note'          => $this->note,
             'date'          => \Carbon\Carbon::parse($this->date)->format('D, d M Y'),
             'time'          => $this->time,
             'created_at'    => $this->created_at->diffForHumans(),
-            'user_id'       => $this->user_id,
+            'user'          => new UserResource($this->user),
         ];
     }
 }
